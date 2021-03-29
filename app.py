@@ -196,6 +196,26 @@ fig5 = go.Figure(data=[go.Pie(labels=dados_biomas.loc[dados_biomas['Espécie exc
 fig5.update_layout(colorway=[
                    '#636EFA', '#EF553B'], legend_traceorder='reversed', template="plotly_dark")
 
+fig6 = generate_bar_chart(
+    dados,
+    "Grupo",
+    {"Plano de Ação Nacional para Conservação (PAN)": ["Sim", "Não"]},
+    "Perfil dos Grupos em relação a presença de um Plano de Ação Nacional Para Conservação",
+    xaxis={'title': 'Quantidade de espécies'},
+    yaxis={'title': 'Grupo'},
+    legend={'x': 0.7, 'y': 1},
+)
+
+fig7 = generate_bar_chart(
+    dados_biomas,
+    "Bioma",
+    {"Plano de Ação Nacional para Conservação (PAN)": ["Sim", "Não"]},
+    "Perfil dos Biomas em relação a presença de um Plano de Ação Nacional Para Conservação",
+    xaxis={'title': 'Quantidade de espécies'},
+    yaxis={'title': 'Bioma'},
+    legend={'x': 0.7, 'y': 1},
+)
+
 # ----------------------------------------------
 
 map_graph = html.Div([
@@ -349,6 +369,27 @@ main_graphs = html.Div([
         [
             dbc.Col([
                     html.Br(),
+                    html.H5("Existência de um Plano Nacional para Conservação (PAN) dentre as espécies exclusivas no Brasil",
+                            style={'text-align': 'center'}),
+                    dcc.Graph(
+                        id='item-4',
+                        figure=fig4
+                    )]),
+            dbc.Col([
+                    html.Br(),
+                    html.H5("Existência de um Plano Nacional para Conservação (PAN) dentre as espécies não exclusivas no Brasil",
+                            style={'text-align': 'center'}),
+                    dcc.Graph(
+                        id='item-5',
+                        figure=fig5
+                    )]),
+        ]
+    ),
+
+    dbc.Row(
+        [
+            dbc.Col([
+                    html.Br(),
                     html.H5("Perfil dos Grupos em relação a exclusividade no Brasil",
                             style={'text-align': 'center'}),
                     dcc.Graph(
@@ -371,19 +412,19 @@ main_graphs = html.Div([
         [
             dbc.Col([
                     html.Br(),
-                    html.H5("Existência de um Plano Nacional para Conservação (PAN) dentre as espécies exclusivas no Brasil",
+                    html.H5("Perfil dos Grupos em relação a presença de um Plano de Ação Nacional Para Conservação",
                             style={'text-align': 'center'}),
                     dcc.Graph(
-                        id='item-4',
-                        figure=fig4
+                        id='item-6',
+                        figure=fig6
                     )]),
             dbc.Col([
                     html.Br(),
-                    html.H5("Existência de um Plano Nacional para Conservação (PAN) dentre as espécies não exclusivas no Brasil",
+                    html.H5("Perfil dos Biomas em relação a presença de um Plano de Ação Nacional Para Conservação",
                             style={'text-align': 'center'}),
                     dcc.Graph(
-                        id='item-5',
-                        figure=fig5
+                        id='item-7',
+                        figure=fig7
                     )]),
         ]
     ),
