@@ -464,23 +464,23 @@ main_graphs = html.Div([
     #         html.Img(id="image_wc_flora"),
     #     ], className='six columns')),
     # ], className='row'),
-    html.Br(),
-    html.H5("Existência de um Plano Nacional para Conservação dentre as espécies não exclusivas no Brasil por Biomas",
-            style={'text-align': 'center'}),
-    html.Div([
-        dcc.Dropdown(
-            id='xaxis-column',
-            options=[{'label': i, 'value': i}
-                     for i in dados_biomas['Bioma'].value_counts().index],
-            value='Cerrado',
-            clearable=False,
+    # html.Br(),
+    # html.H5("Existência de um Plano Nacional para Conservação dentre as espécies não exclusivas no Brasil por Biomas",
+    #         style={'text-align': 'center'}),
+    # html.Div([
+    #     dcc.Dropdown(
+    #         id='xaxis-column',
+    #         options=[{'label': i, 'value': i}
+    #                  for i in dados_biomas['Bioma'].value_counts().index],
+    #         value='Cerrado',
+    #         clearable=False,
 
-        ),
-    ]),
+    #     ),
+    # ]),
 
-    html.Div([
-        dcc.Graph(id='the_graph')
-    ])
+    # html.Div([
+    #     dcc.Graph(id='the_graph')
+    # ])
 ])
 
 
@@ -500,16 +500,16 @@ def make_image(b):
     return 'data:image/png;base64,{}'.format(base64.b64encode(img.getvalue()).decode())
 
 
-@ app.callback(
-    Output(component_id='the_graph', component_property='figure'),
-    [Input(component_id='xaxis-column', component_property='value')]
-)
-def update_graph(xasis_column_name):
-    fig_teste = go.Figure(data=[go.Pie(labels=dados_biomas.loc[dados_biomas['Bioma'] == xasis_column_name, 'Plano de Ação Nacional para Conservação (PAN)'].value_counts().sort_index().index,
-                                       values=dados_biomas.loc[dados_biomas['Bioma'] == xasis_column_name, 'Plano de Ação Nacional para Conservação (PAN)'].value_counts().sort_index(), hole=.4)])
-    fig_teste.update_layout(colorway=[
-                            '#636EFA', '#EF553B'], legend_traceorder='reversed', template="plotly_dark")
-    return (fig_teste)
+# @ app.callback(
+#     Output(component_id='the_graph', component_property='figure'),
+#     [Input(component_id='xaxis-column', component_property='value')]
+# )
+# def update_graph(xasis_column_name):
+#     fig_teste = go.Figure(data=[go.Pie(labels=dados_biomas.loc[dados_biomas['Bioma'] == xasis_column_name, 'Plano de Ação Nacional para Conservação (PAN)'].value_counts().sort_index().index,
+#                                        values=dados_biomas.loc[dados_biomas['Bioma'] == xasis_column_name, 'Plano de Ação Nacional para Conservação (PAN)'].value_counts().sort_index(), hole=.4)])
+#     fig_teste.update_layout(colorway=[
+#                             '#636EFA', '#EF553B'], legend_traceorder='reversed', template="plotly_dark")
+#     return (fig_teste)
 #     id="satellite-dropdown-component",
 #     options=[
 #         {"label": "H45-K1", "value": "h45-k1"},
@@ -540,7 +540,7 @@ side_panel_layout = html.Div(
         html.Div(id="panel-side-text",
                  children=[
                      satellite_title,
-                    satellite_body
+                    satellite_body,
                  ]),
     ],
 )
@@ -555,10 +555,10 @@ main_panel_layout = html.Div(
                              html.Img(
                                  src="https://img.icons8.com/cotton/50/000000/footprint-scanning--v1.png"),
                              html.H5('Endangered Species Dashboard', style={
-                                 'color': 'white', 'display': 'inline', 'vertical-align': 'middle',"padding-left":"5px","font-weight": "600"})
+                                 'color': 'white', 'display': 'inline', 'vertical-align': 'middle', "padding-left": "5px", "font-weight": "600"}),
                          ]
                          )]),
-                 ], style={'backgroundColor': '#fec036', 'width': '100%',"padding":"10px", "text-align": "center"}),
+                 ], style={'backgroundColor': '#fec036', 'width': '100%', "padding": "10px", "text-align": "center"}),
         html.Div(
             id="panel-upper-lower",
             children=[
