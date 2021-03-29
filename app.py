@@ -134,9 +134,9 @@ exclusiva = {
     'Informação não disponível': 0
 }
 
-dados = pd.read_csv('../dados_tratados.csv')
-dados_separados = pd.read_csv('../dados_separados.csv')
-dados_biomas = pd.read_csv('../dados_biomas.csv')
+dados = pd.read_csv('./date/dados_tratados.csv')
+dados_separados = pd.read_csv('./date/dados_separados.csv')
+dados_biomas = pd.read_csv('./date/dados_biomas.csv')
 
 dados_ameacas = dados
 dados_ameacas.rename(
@@ -525,7 +525,8 @@ satellite_dropdown_text = html.P(
 )
 
 satellite_title = html.H1(
-    id="satellite-name", children="Análise das espécies ameaçadas no Brasil")
+    id="satellite-name", children=[
+        "Análise das espécies ameaçadas no Brasil"])
 
 satellite_body = html.P(
     className="satellite-description", id="satellite-description", children=["1. Isaac Gomes", html.Br(), "2. Mateus Abrantes", html.Br(), "3. Tales Joabe"]
@@ -537,17 +538,35 @@ side_panel_layout = html.Div(
         satellite_dropdown_text,
         # html.Div(id="satellite-dropdown", children=satellite_dropdown),
         html.Div(id="panel-side-text",
-                 children=[satellite_title, satellite_body]),
+                 children=[
+                     satellite_title,
+                    satellite_body
+                 ]),
     ],
 )
 
 
 main_panel_layout = html.Div(
-    id="panel-upper-lower",
     children=[
-        main_graphs,
-        map_graph,
-        map_biomas,
+        html.Div(id="nav",
+                 children=[
+                     html.Div(children=[
+                         html.Div(children=[
+                             html.Img(
+                                 src="https://img.icons8.com/cotton/50/000000/footprint-scanning--v1.png"),
+                             html.H5('Endangered Species Dashboard', style={
+                                 'color': 'white', 'display': 'inline', 'vertical-align': 'middle',"padding-left":"5px","font-weight": "600"})
+                         ]
+                         )]),
+                 ], style={'backgroundColor': '#fec036', 'width': '100%',"padding":"10px", "text-align": "center"}),
+        html.Div(
+            id="panel-upper-lower",
+            children=[
+                main_graphs,
+                map_graph,
+                map_biomas,
+            ],
+        )
     ],
 )
 
