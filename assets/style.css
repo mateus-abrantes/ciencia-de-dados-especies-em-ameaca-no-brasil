@@ -59,8 +59,8 @@ body {
 }
 
 .Select--single > .Select-control .Select-value, .Select-placeholder {
-    border: 1px solid gray;
-    border-radius: 4px;
+    /* border: 1px solid gray; */
+    /* border-radius: 4px; */
     color: white;
     background-color: #2b2b2b;
     cursor: pointer;
